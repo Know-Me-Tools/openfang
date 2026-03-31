@@ -11,6 +11,8 @@ pub mod fallback;
 pub mod gemini;
 pub mod openai;
 pub mod qwen_code;
+#[cfg(feature = "uar-driver")]
+pub mod uar;
 pub mod vertex;
 
 use crate::llm_driver::{DriverConfig, LlmDriver, LlmError};
@@ -426,6 +428,13 @@ pub fn create_driver(config: &DriverConfig) -> Result<Arc<dyn LlmDriver>, LlmErr
         return Ok(Arc::new(anthropic::AnthropicDriver::new(api_key, base_url)));
     }
 
+    // UAR (Universal Agent Runtime) — wraps liter-llm for 142+ providers.
+    // Model must be in "provider/model" format (e.g. "openai/gpt-4o").
+    #[cfg(feature = "uar-driver")]
+    if provider == "uar" {
+        return uar::UarDriver::create(config);
+    }
+
     // All other providers use OpenAI-compatible format
     if let Some(defaults) = provider_defaults(provider) {
         let api_key = config
@@ -489,7 +498,8 @@ pub fn create_driver(config: &DriverConfig) -> Result<Arc<dyn LlmDriver>, LlmErr
             "Unknown provider '{}'. Supported: anthropic, gemini, openai, azure, groq, openrouter, \
              deepseek, together, mistral, fireworks, ollama, vllm, lmstudio, perplexity, \
              cohere, ai21, cerebras, sambanova, huggingface, xai, replicate, github-copilot, \
-             chutes, venice, nvidia, codex, claude-code. Or set base_url for a custom OpenAI-compatible endpoint.",
+             chutes, venice, nvidia, codex, claude-code, uar (requires uar-driver feature). \
+             Or set base_url for a custom OpenAI-compatible endpoint.",
             provider
         ),
     })

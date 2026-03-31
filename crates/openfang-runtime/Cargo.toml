@@ -5,7 +5,17 @@ edition.workspace = true
 license.workspace = true
 description = "Agent runtime and execution environment for OpenFang"
 
+[features]
+## Enable the UAR (Universal Agent Runtime) LLM driver.
+##
+## Adds the `"uar"` provider which routes through liter-llm's unified
+## client for 142+ providers using `provider/model` addressing.
+uar-driver = ["dep:universal-agent-runtime"]
+
 [dependencies]
+# UAR — optional; only compiled when the `uar-driver` feature is enabled.
+universal-agent-runtime = { git = "https://github.com/Prometheus-AGS/universal-agent-runtime.git", branch = "main", optional = true }
+
 openfang-types = { path = "../openfang-types" }
 openfang-memory = { path = "../openfang-memory" }
 openfang-skills = { path = "../openfang-skills" }
