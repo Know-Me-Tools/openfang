@@ -5358,7 +5358,7 @@ dependencies = [
  "libc",
  "percent-encoding",
  "pin-project-lite",
- "socket2 0.6.3",
+ "socket2 0.5.10",
  "system-configuration",
  "tokio",
  "tower-service",
@@ -9170,7 +9170,7 @@ dependencies = [
  "quinn-udp",
  "rustc-hash 2.1.2",
  "rustls 0.23.37",
- "socket2 0.6.3",
+ "socket2 0.5.10",
  "thiserror 2.0.18",
  "tokio",
  "tracing",
@@ -9208,7 +9208,7 @@ dependencies = [
  "cfg_aliases",
  "libc",
  "once_cell",
- "socket2 0.6.3",
+ "socket2 0.5.10",
  "tracing",
  "windows-sys 0.60.2",
 ]
@@ -11676,7 +11676,7 @@ checksum = "13c2bddecc57b384dee18652358fb23172facb8a2c51ccc10d74c157bdea3292"
 [[package]]
 name = "surreal-memory"
 version = "0.1.0"
-source = "git+https://github.com/Prometheus-AGS/surreal-memory-server?branch=main#2114708ee6a7e4f7702730b5cd58a481fe4ef590"
+source = "git+https://github.com/Prometheus-AGS/surreal-memory-server?branch=main#673207e9ac552d7233d879e466a8717dcc0a5bfb"
 dependencies = [
  "anyhow",
  "async-trait",
