@@ -5358,7 +5358,7 @@ dependencies = [
  "libc",
  "percent-encoding",
  "pin-project-lite",
- "socket2 0.5.10",
+ "socket2 0.6.3",
  "system-configuration",
  "tokio",
  "tower-service",
@@ -9170,7 +9170,7 @@ dependencies = [
  "quinn-udp",
  "rustc-hash 2.1.2",
  "rustls 0.23.37",
- "socket2 0.5.10",
+ "socket2 0.6.3",
  "thiserror 2.0.18",
  "tokio",
  "tracing",
@@ -9208,7 +9208,7 @@ dependencies = [
  "cfg_aliases",
  "libc",
  "once_cell",
- "socket2 0.5.10",
+ "socket2 0.6.3",
  "tracing",
  "windows-sys 0.60.2",
 ]
@@ -13523,7 +13523,7 @@ checksum = "39ec24b3121d976906ece63c9daad25b85969647682eee313cb5779fdd69e14e"
 [[package]]
 name = "universal-agent-runtime"
 version = "0.1.0"
-source = "git+https://github.com/Prometheus-AGS/universal-agent-runtime.git?branch=main#e1b272d81b0e3f8648edec0f3ed8026df2d81136"
+source = "git+https://github.com/Prometheus-AGS/universal-agent-runtime.git?branch=main#7f75d790b0b351dfdea04b8de4988c9e95daefce"
 dependencies = [
  "anyhow",
  "argon2",
