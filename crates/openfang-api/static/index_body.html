@@ -3268,16 +3268,20 @@ args = ["-y", "@modelcontextprotocol/server-filesystem", "/path"]</pre>
                       <button class="btn btn-ghost btn-sm" style="color:var(--error)" @click="removeProviderKey(p)">Remove Key</button>
                     </div>
                   </template>
+                  <!-- UAR description hint -->
+                  <template x-if="p.id === 'uar' && p.auth_status !== 'configured'">
+                    <div class="text-xs text-dim mt-2">Meta-provider for 142+ LLMs via <code style="color:var(--accent-light);background:var(--bg);padding:1px 4px;border-radius:2px">provider/model</code> format (e.g. <code style="color:var(--accent-light);background:var(--bg);padding:1px 4px;border-radius:2px">openai/gpt-4o</code>). Key is optional &mdash; agents can use provider-specific keys instead.</div>
+                  </template>
                   <!-- No key needed -->
-                  <template x-if="!p.api_key_env || p.key_required === false">
+                  <template x-if="(!p.api_key_env || p.key_required === false) && p.id !== 'uar'">
                     <div class="text-xs mt-2" style="color:var(--success)" x-show="p.auth_status !== 'configured' && p.auth_status !== 'not_set' && p.auth_status !== 'missing'">No API key needed &mdash; runs locally or is free</div>
                   </template>
-                  <!-- Base URL editor for local providers -->
-                  <template x-if="p.is_local">
+                  <!-- Base URL editor for local providers or UAR -->
+                  <template x-if="p.is_local || p.id === 'uar'">
                     <div class="mt-3" style="border-top:1px solid var(--border);padding-top:8px">
-                      <div class="text-xs text-dim mb-1">Base URL</div>
+                      <div class="text-xs text-dim mb-1">Base URL<template x-if="p.id === 'uar'"><span> (optional &mdash; for LiteLLM proxy or custom gateway)</span></template></div>
                       <div class="key-input-group">
-                        <input type="text" :placeholder="'http://localhost:...'" x-model="providerUrlInputs[p.id]" style="font-size:12px">
+                        <input type="text" :placeholder="p.id === 'uar' ? 'https://your-litellm-proxy.example.com' : 'http://localhost:...'" x-model="providerUrlInputs[p.id]" style="font-size:12px">
                         <button class="btn btn-primary btn-sm" @click="saveProviderUrl(p)" :disabled="providerUrlSaving[p.id]">
                           <span x-show="!providerUrlSaving[p.id]">Save</span>
                           <span x-show="providerUrlSaving[p.id]" class="spinner" style="width:10px;height:10px;border-width:2px"></span>

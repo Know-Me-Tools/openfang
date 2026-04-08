@@ -224,7 +224,7 @@ function settingsPage() {
         this.providers = data.providers || [];
         for (var i = 0; i < this.providers.length; i++) {
           var p = this.providers[i];
-          if (p.is_local) {
+          if (p.is_local || p.id === 'uar') {
             if (!this.providerUrlInputs[p.id]) {
               this.providerUrlInputs[p.id] = p.base_url || '';
             }
@@ -356,6 +356,7 @@ function settingsPage() {
         if (p.id === 'claude-code') return 'Not Installed';
         return 'Not Set';
       }
+      if (p.id === 'uar') return 'Key Optional';
       return 'No Key Needed';
     },
 

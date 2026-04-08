@@ -75,6 +75,19 @@ impl ModelCatalog {
                 continue;
             }
 
+            // UAR: key is optional but show "Configured" when a key is available.
+            // UAR resolves keys via UAR_LLM__API_KEY → LLM_API_KEY fallback chain.
+            if provider.id == "uar" {
+                let has_uar_key = std::env::var("UAR_LLM__API_KEY").is_ok()
+                    || std::env::var("LLM_API_KEY").is_ok();
+                provider.auth_status = if has_uar_key {
+                    AuthStatus::Configured
+                } else {
+                    AuthStatus::NotRequired
+                };
+                continue;
+            }
+
             if !provider.key_required {
                 provider.auth_status = AuthStatus::NotRequired;
                 continue;
@@ -914,6 +927,20 @@ fn builtin_providers() -> Vec<ProviderInfo> {
             base_url: String::new(),
             key_required: false,
             auth_status: AuthStatus::NotRequired,
+            model_count: 0,
+        },
+        // ── Universal Agent Runtime (UAR) ──────────────────────────────
+        // Meta-provider wrapping liter-llm for 142+ LLM providers via
+        // unified `provider/model` addressing (e.g. "openai/gpt-4o").
+        // Base URL is optional — only needed when pointing at a self-hosted
+        // LiteLLM proxy or similar gateway.
+        ProviderInfo {
+            id: "uar".into(),
+            display_name: "Universal Agent Runtime".into(),
+            api_key_env: "UAR_LLM__API_KEY".into(),
+            base_url: String::new(),
+            key_required: false,
+            auth_status: AuthStatus::Missing,
             model_count: 0,
         },
     ]
@@ -3905,7 +3932,7 @@ mod tests {
     #[test]
     fn test_catalog_has_providers() {
         let catalog = ModelCatalog::new();
-        assert_eq!(catalog.list_providers().len(), 41);
+        assert_eq!(catalog.list_providers().len(), 42);
     }
 
     #[test]
