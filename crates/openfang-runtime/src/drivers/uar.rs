@@ -446,7 +446,13 @@ fn build_uar_request(request: &CompletionRequest) -> LlmRequest {
     }
 
     let tools = tools_to_openai_json(&request.tools);
-    LlmRequest { messages, tools }
+    LlmRequest {
+        messages,
+        tools,
+        cache_strategy: None,
+        thinking_config: None,
+        anthropic_system: None,
+    }
 }
 
 /// Convert OpenFang [`ToolDefinition`]s to OpenAI function-calling JSON schema.
