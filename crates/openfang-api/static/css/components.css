@@ -217,7 +217,22 @@ tr:hover td { background: var(--surface2); }
   min-height: 80px;
 }
 
-.form-select { cursor: pointer; }
+.form-select {
+  cursor: pointer;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  padding-right: 32px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239E9895' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 12px;
+}
+
+.form-select option {
+  background: var(--surface);
+  color: var(--text);
+}
 
 .form-checkbox {
   display: flex;
@@ -987,6 +1002,25 @@ mark.search-highlight {
 .model-switcher-search select {
   max-width: 100px;
   flex-shrink: 0;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text-dim);
+  font-size: 11px;
+  padding: 2px 22px 2px 6px;
+  cursor: pointer;
+  font-family: var(--font-mono);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24' fill='none' stroke='%239E9895' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 4px center;
+  background-size: 10px;
+}
+.model-switcher-search select option {
+  background: var(--surface);
+  color: var(--text);
 }
 .model-switcher-search select:focus {
   outline: none;

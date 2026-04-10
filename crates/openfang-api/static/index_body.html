@@ -790,7 +790,7 @@
                       <div class="model-switcher-search">
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0;opacity:0.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
                         <input id="model-switcher-search" type="text" x-model="modelSwitcherFilter" placeholder="Search models..." @keydown.escape.stop="showModelSwitcher = false" @keydown.arrow-down.prevent="modelSwitcherIdx = Math.min(modelSwitcherIdx + 1, filteredSwitcherModels.length - 1)" @keydown.arrow-up.prevent="modelSwitcherIdx = Math.max(modelSwitcherIdx - 1, 0)" @keydown.enter.prevent="!$event.isComposing && $event.keyCode !== 229 && filteredSwitcherModels[modelSwitcherIdx] && switchModel(filteredSwitcherModels[modelSwitcherIdx])">
-                        <select x-model="modelSwitcherProviderFilter" style="background:var(--surface2);border:1px solid var(--border);border-radius:6px;color:var(--text-dim);font-size:11px;padding:2px 6px;cursor:pointer;font-family:var(--font-mono);flex-shrink:0">
+                        <select x-model="modelSwitcherProviderFilter">
                           <option value="">All</option>
                           <template x-for="pn in switcherProviders" :key="pn">
                             <option :value="pn" x-text="pn"></option>
@@ -4540,7 +4540,7 @@ args = ["-y", "@modelcontextprotocol/server-filesystem", "/path"]</pre>
               <div style="display:flex;flex-direction:column;gap:12px;margin-top:12px">
                 <div>
                   <label class="text-xs text-dim" style="display:block;margin-bottom:4px">From Agent</label>
-                  <select x-model="sendFrom" class="input" style="width:100%">
+                  <select x-model="sendFrom" class="form-select" style="width:100%">
                     <option value="">Select agent...</option>
                     <template x-for="n in topology.nodes" :key="n.id">
                       <option :value="n.id" x-text="n.name + ' (' + n.state + ')'"></option>
@@ -4549,7 +4549,7 @@ args = ["-y", "@modelcontextprotocol/server-filesystem", "/path"]</pre>
                 </div>
                 <div>
                   <label class="text-xs text-dim" style="display:block;margin-bottom:4px">To Agent</label>
-                  <select x-model="sendTo" class="input" style="width:100%">
+                  <select x-model="sendTo" class="form-select" style="width:100%">
                     <option value="">Select agent...</option>
                     <template x-for="n in topology.nodes" :key="n.id">
                       <option :value="n.id" x-text="n.name + ' (' + n.state + ')'"></option>
@@ -4586,7 +4586,7 @@ args = ["-y", "@modelcontextprotocol/server-filesystem", "/path"]</pre>
                 </div>
                 <div>
                   <label class="text-xs text-dim" style="display:block;margin-bottom:4px">Assign To (optional)</label>
-                  <select x-model="taskAssign" class="input" style="width:100%">
+                  <select x-model="taskAssign" class="form-select" style="width:100%">
                     <option value="">Unassigned</option>
                     <template x-for="n in topology.nodes" :key="n.id">
                       <option :value="n.id" x-text="n.name"></option>
