@@ -1,8 +1,8 @@
 <p align="center">
-  <img src="public/assets/openfang-logo.png" width="160" alt="OpenFang Logo" />
+  <img src="docs/branding/boss-libre.png" width="160" alt="BossFang Logo" />
 </p>
 
-<h1 align="center">OpenFang</h1>
+<h1 align="center">BossFang</h1>
 <h3 align="center">The Agent Operating System</h3>
 
 <p align="center">
